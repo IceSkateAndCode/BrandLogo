@@ -1,10 +1,11 @@
 import colors from "@/styles/colors";
 import React from "react";
-import { Text, View } from "react-native";
+import { Text } from "react-native";
+import { SafeAreaView } from "react-native-safe-area-context";
 
 export default function EnhancingScreen() {
   return (
-    <View style={{backgroundColor:colors.background.light}}>
+    <SafeAreaView style={{backgroundColor:colors.background.light}}>
       <Text style={{color:colors.text.light}}>Each element can enhance the strength of one other:
         Fire enhances light
         Light enhances electricity
@@ -15,6 +16,6 @@ export default function EnhancingScreen() {
         Sound enhances earth
         Earth enhances fire
       </Text>
-    </View>
+    </SafeAreaView>
   );
 }

@@ -14,7 +14,7 @@
  - *This is how to italicize text* * *
  - **This is how to bold text** ** **
  - ***This is how to bold and italicize text*** *** ***
- - <u>This is how to underline text</u>      < u > < /u >
+ - <u>This is how to underline text</u>  (doesn't seem to be working tho)    < u > < /u >
 
  ## Works Cited
  - [ text ] (link)

@@ -13,6 +13,7 @@ SplashScreen.preventAutoHideAsync();
 export default function TabsLayout() {
   const [loaded, error] = useFonts({
     'Jacquard24': require('../../assets/fonts/Jacquard24-Regular.ttf'),
+    'Metamorphous': require('../../assets/fonts/Metamorphous-Regular.ttf')
   });
 
   useEffect(() => {
@@ -47,6 +48,7 @@ export default function TabsLayout() {
         name="index"
         options={{
           headerTitle: "Overview",
+          title: "Overview",
           tabBarIcon: ({ focused, color }) => (
             <Ionicons
               name={focused ? "home-sharp" : "home-outline"}
@@ -60,6 +62,7 @@ export default function TabsLayout() {
         name="strengths"
         options={{
           headerTitle: "Strengths",
+          title: "Strengths",
           tabBarIcon: ({ focused, color }) => (
             <Ionicons
               name={focused ? "barbell" : "barbell-outline"}
@@ -73,6 +76,7 @@ export default function TabsLayout() {
         name="enhancing"
         options={{
           headerTitle: "Enhancing",
+          title: "Enhancing",
           tabBarIcon: ({ focused, color }) => (
             <Ionicons
               name={focused ? "arrow-up-circle" : "arrow-up-circle-outline"}

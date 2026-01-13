@@ -6,7 +6,7 @@ import * as SplashScreen from 'expo-splash-screen';
 import { useEffect } from 'react';
 import { View } from "react-native";
 import "../../assets/fonts/Jacquard24-Regular.ttf";
-import AppHeader from "../components/AppHeader";
+import AppHeader from "../../components/AppHeader";
 
 SplashScreen.preventAutoHideAsync();
 

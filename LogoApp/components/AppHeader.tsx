@@ -7,7 +7,7 @@ export default function AppHeader() {
   return <View style={styles.container}>
     <View style={styles.leftContainer}>
       <Image style={styles.imageStyle}
-          source={require("../../assets/images/logo.png")}/>
+          source={require("../assets/images/logo.png")}/>
       <View style={styles.screenTextContainer}>  
         <Text style={styles.screenTextStyle}>ScreenNameHere</Text>
       </View>

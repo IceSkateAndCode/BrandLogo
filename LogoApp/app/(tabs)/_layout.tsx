@@ -1,9 +1,7 @@
 import colors from "@/styles/colors";
 import { Ionicons } from "@expo/vector-icons";
-import { useFonts } from 'expo-font';
 import { Tabs } from "expo-router";
 import * as SplashScreen from 'expo-splash-screen';
-import { useEffect } from 'react';
 import { View } from "react-native";
 import "../../assets/fonts/Jacquard24-Regular.ttf";
 import AppHeader from "../../components/AppHeader";
@@ -11,20 +9,6 @@ import AppHeader from "../../components/AppHeader";
 SplashScreen.preventAutoHideAsync();
 
 export default function TabsLayout() {
-  const [loaded, error] = useFonts({
-    'Jacquard24': require('../../assets/fonts/Jacquard24-Regular.ttf'),
-    'Metamorphous': require('../../assets/fonts/Metamorphous-Regular.ttf')
-  });
-
-  useEffect(() => {
-    if (loaded || error) {
-      SplashScreen.hideAsync();
-    }
-  }, [loaded, error]);
-
-  if (!loaded && !error) {
-    return null;
-  }
   return (
     <View style={{flex: 1}}>
     <AppHeader />

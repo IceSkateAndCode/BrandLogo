@@ -1,16 +1,84 @@
 import colors from "@/styles/colors";
 import Checkbox from 'expo-checkbox';
 import { useRouter } from "expo-router";
-import { useState } from "react";
-import { StyleSheet, Text, View } from "react-native";
+import { useEffect, useState } from "react";
+import { Alert, AppState, AppStateStatus, StyleSheet, Text, View } from "react-native";
 import Button from "../components/ButtonComp";
 import TextField from "../components/TextField";
+import { supabase } from "../utils/supabase";
 
+/*
+  Auth component responsibilities:
+  - Collect email + password
+  - Call Supabase auth methods
+  - NOT handle navigation
+  - NOT store session state
+*/
 export default function Auth() {
   const router = useRouter();
   const [email, setEmail] = useState<string>("@gmail.com");
   const [password, setPassword] = useState<string>("123456");
   const [showPassword, setShowPassword] = useState(false);
+
+  /*
+    Supabase uses background token refresh.
+    We start/stop it based on app state.
+  */
+  useEffect(() => {
+    const handleAppStateChange = (nextState: AppStateStatus) => {
+      if (nextState === "active") {
+        supabase.auth.startAutoRefresh();
+      } else {
+        try {
+          supabase.auth.stopAutoRefresh();
+        } catch {}
+      }
+    };
+
+    const subscription = AppState.addEventListener(
+      "change",
+      handleAppStateChange,
+    );
+
+    if (AppState.currentState === "active") {
+      supabase.auth.startAutoRefresh();
+    }
+
+    return () => {
+      if (typeof subscription?.remove === "function") {
+        subscription.remove();
+      }
+      try {
+        supabase.auth.stopAutoRefresh();
+      } catch {}
+    };
+  }, []);
+
+   async function signInWithEmail() {
+    console.log('starting supabase log in')
+    const { error } = await supabase.auth.signInWithPassword({
+      email,
+      password,
+    });
+
+    if (error) {
+      Alert.alert(error.message);
+    }
+    console.log('supabase logged in')
+  }
+
+  async function signUpWithEmail() {
+    console.log('starting supabase sign up')
+    const { error } = await supabase.auth.signUp({
+      email,
+      password,
+    });
+
+    if (error) {
+      Alert.alert(error.message);
+    }
+    console.log('supabase signed up')
+  }
 
   const hiddenPassword = () => {
     const passLen = password.length;
@@ -22,7 +90,8 @@ export default function Auth() {
     return hidden
   }
 
-  const openTabNav = () => {
+  async function logIn() {
+    console.log('starting log in')
     if (email === "" || password === "") {
       alert("Please enter email and password")
     }
@@ -35,8 +104,26 @@ export default function Auth() {
         alert("Password must contain a number")
     }
     else {
-      setEmail(email);
-      router.push({ pathname: "/(tabs)"});
+      console.log('values valid')
+      signInWithEmail()
+    };
+  };
+  async function signUp() {
+    console.log('starting sign up')
+    if (email === "" || password === "") {
+      alert("Please enter email and password")
+    }
+    else if(password.length<6){
+        alert("Password must be at least 6 characters")
+    } 
+    else if(!(password.includes('1') || password.includes('2') || password.includes('3')
+    || password.includes('4')|| password.includes('5')|| password.includes('6')|| password.includes('7')
+    || password.includes('8')|| password.includes('9')|| password.includes('0'))){
+        alert("Password must contain a number")
+    }
+    else {
+      console.log('values valid')
+      signUpWithEmail()
     };
   };
 
@@ -60,8 +147,8 @@ export default function Auth() {
         onChangeText={setPassword}
       />
 
-      <Button title="Log In" onPress={openTabNav} />
-      <Button title="Sign Up" onPress={openTabNav} />
+      <Button title="Log In" onPress={logIn} />
+      <Button title="Sign Up" onPress={signUp} />
     </View>
   );
 }

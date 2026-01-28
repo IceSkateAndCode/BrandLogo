@@ -1,3 +1,4 @@
+import { AuthProvider } from "@/components/AuthProvider";
 import { useFonts } from 'expo-font';
 import { Slot } from "expo-router";
 import * as SplashScreen from 'expo-splash-screen';
@@ -19,10 +20,14 @@ export default function RootLayout() {
   if (!loaded && !error) {
     return null;
   }
+
+  // Wrap the entire app in AuthProvider so auth state is available everywhere.
+  // This prevents multiple, scattered onAuthStateChange listeners and ensures
+  // a single source of truth for session state that drives UI declaratively.
   return( 
-    <>
+    <AuthProvider>
       <StatusBar style="light" />
       <Slot />; 
-    </>
+    </AuthProvider>
   );
 }

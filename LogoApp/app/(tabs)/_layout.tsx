@@ -29,6 +29,20 @@ export default function TabsLayout() {
       }}
     >
       <Tabs.Screen
+        name="characterCreator"
+        options={{
+          headerTitle: "character",
+          title: "Character",
+          tabBarIcon: ({ focused, color }) => (
+            <Ionicons
+              name={focused ? "person" : "person-outline"}
+              size={24}
+              color={color}
+            />
+          ),
+        }}
+      />
+      <Tabs.Screen
         name="index"
         options={{
           headerTitle: "Overview",

@@ -64,6 +64,7 @@ export default function Auth() {
     if (error) {
       Alert.alert(error.message);
     }
+    else{}
     console.log('supabase logged in')
   }
 
@@ -98,14 +99,13 @@ export default function Auth() {
     else if(password.length<6){
         alert("Password must be at least 6 characters")
     } 
-    else if(!(password.includes('1') || password.includes('2') || password.includes('3')
-    || password.includes('4')|| password.includes('5')|| password.includes('6')|| password.includes('7')
-    || password.includes('8')|| password.includes('9')|| password.includes('0'))){
+    else if(!/\d/.test(password)){
         alert("Password must contain a number")
     }
     else {
       console.log('values valid')
       signInWithEmail()
+      router.push({pathname: '/(tabs)', params: {email}})
     };
   };
   async function signUp() {
@@ -124,6 +124,7 @@ export default function Auth() {
     else {
       console.log('values valid')
       signUpWithEmail()
+      router.push({pathname: '/(tabs)', params: {email}})
     };
   };
 

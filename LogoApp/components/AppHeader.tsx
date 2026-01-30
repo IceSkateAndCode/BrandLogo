@@ -1,7 +1,9 @@
 import colors from "@/styles/colors";
+import { supabase } from "@/utils/supabase";
 import { Text } from "@react-navigation/elements";
 import { usePathname } from "expo-router";
-import { Image, StyleSheet, View } from "react-native";
+import { Alert, Image, StyleSheet, View } from "react-native";
+import { useAuth } from "./AuthProvider";
 import ButtonComp from "./ButtonComp";
 
 function getTitleFromPath(pathname: string){
@@ -9,15 +11,35 @@ function getTitleFromPath(pathname: string){
     return 'Enhancing';
   if(pathname==='/strengths')
     return 'Strengths';
+  if(pathname==='/characterCreator')
+    return 'Create a Character';
+  if(pathname==='/characters')
+    return 'Characters'
   return 'Overview';
 }
-function logOut(){
-  console.log("Logging Out")
-}
+// Simplified sign out: intentionally NOT performing any navigation here.
+  // Rationale: navigation attempts from inside nested navigators (tabs)
+  // were unreliable and caused unmatched route or no-op behavior. The
+  // app now uses a global AuthProvider and the tabs layout renders the
+  // Auth screen in-place when the session becomes null.
+  async function logOut() {
+    try {
+      const { error } = await supabase.auth.signOut();
+      if (error) {
+        console.error("Logout error:", error);
+        Alert.alert("Logout failed", error.message);
+      }
+    } catch (err: any) {
+      Alert.alert("Logout failed", err?.message ?? String(err));
+    }
+  }
 
 export default function AppHeader() {
   const pathname = usePathname();
   const title = getTitleFromPath(pathname);
+    const { session } = useAuth();
+
+    if (session===null) return;
 
   return <View style={styles.container}>
     <View style={styles.leftContainer}>

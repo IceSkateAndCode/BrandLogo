@@ -14,7 +14,13 @@ import colors from "./colors";
   textStyle: {
     fontFamily: 'Metamorphous',
     color: colors.text.light
-  }
+  },
+
+  title: {
+    fontFamily: 'Jacquard24',
+    fontSize: 36,
+    color: colors.primary
+  },
 })
 
 export default defaultStyles;

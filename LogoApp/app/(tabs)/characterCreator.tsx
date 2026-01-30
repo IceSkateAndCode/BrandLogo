@@ -156,7 +156,7 @@ export default function EditCharacterScreen() {
   return (
     <View style={defaultStyles.container}>
       <View style={{marginTop: 25, marginBottom: 12}}>
-        <Text style={styles.titleTextStyle}>Create Your Character</Text> 
+        <Text style={defaultStyles.title}>Create Your Character</Text> 
       </View> 
       <View style={styles.form}>
         <TextField
@@ -187,10 +187,4 @@ const styles = StyleSheet.create({
     justifyContent: "center",
     alignItems: "center",
   },
-  titleTextStyle: {
-    fontFamily: 'Jacquard24',
-    fontSize: 36,
-    color: colors.primary,
-
-  }
 });

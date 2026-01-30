@@ -1,11 +1,15 @@
 import colors from "@/styles/colors";
+import defaultStyles from "@/styles/defaultStyles";
 import React from "react";
-import { StyleSheet, Text } from "react-native";
+import { StyleSheet, Text, View } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 
 export default function StrengthsScreen() {
   return (
     <SafeAreaView style={styles.container}>
+      <View style={{marginBottom: 12}}>
+        <Text style={defaultStyles.title}>Strengths</Text>
+      </View>
       <Text style={styles.textStyle}> Each element is strong against two others: {'\n'}
         Fire is strong against life and shadow. {'\n'}
         Water is strong against fire and metal {'\n'}

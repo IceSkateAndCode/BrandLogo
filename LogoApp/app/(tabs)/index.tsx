@@ -1,11 +1,15 @@
 import colors from "@/styles/colors";
+import defaultStyles from "@/styles/defaultStyles";
 import React from "react";
-import { StyleSheet, Text } from "react-native";
+import { StyleSheet, Text, View } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 
 export default function OverviewScreen() {
   return (
     <SafeAreaView style={styles.container}>
+      <View style={{marginBottom: 12}}>
+        <Text style={defaultStyles.title}>Overview</Text>
+      </View>
       <Text style={styles.textStyle}>There are 8 different elements of magic.
         Each is strong and weak against different elements.  Every element can enhance
         the power of another, in a circle.  The elements are fire, light, electricity, metal,

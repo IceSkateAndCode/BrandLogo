@@ -2,7 +2,7 @@
 import React, { useCallback, useEffect, useState } from "react";
 import { FlatList, RefreshControl, StyleSheet, Text, View } from "react-native";
 
-import { CharacterProfile } from "@/components/CharacterRow";
+import { CharacterRow, characterProfile } from "@/components/CharacterRow";
 import colors from "@/styles/colors";
 import defaultStyles from "@/styles/defaultStyles";
 import { supabase } from "@/utils/supabase";
@@ -19,7 +19,7 @@ import { useRouter } from "expo-router";
 export default function RosterScreen() {
   const router = useRouter();
 
-  const [profiles, setProfiles] = useState<CharacterProfile[]>([]);
+  const [profiles, setProfiles] = useState<characterProfile[]>([]);
   const [loading, setLoading] = useState(true);
   const [refreshing, setRefreshing] = useState(false);
   const [error, setError] = useState<string | null>(null);
@@ -43,7 +43,7 @@ export default function RosterScreen() {
       }
 
       // data may be typed as any[] here; we map it to our local state type
-      setProfiles((data ?? []) as RosterProfile[]);
+      setProfiles((data ?? []) as characterProfile[]);
     } catch (err) {
       console.error("fetchProfiles exception:", err);
       setError(String(err));
@@ -122,13 +122,15 @@ export default function RosterScreen() {
   }, [fetchProfiles]);
 
   return (
-    <View style={defaultStyles.pageContainer}>
-      <Text style={styles.title}>Roster</Text>
+    <View style={defaultStyles.container}>
+      <View style={{marginTop: 25, marginBottom: 12}}>
+        <Text style={defaultStyles.title}>Roster</Text>
+      </View>
 
       <FlatList
         data={profiles}
         keyExtractor={(item) => item.id}
-        renderItem={({ item }) => <RosterRow item={item} />}
+        renderItem={({ item }) => <CharacterRow character={item} />}
         refreshControl={
           <RefreshControl refreshing={refreshing} onRefresh={onRefresh} />
         }
@@ -139,11 +141,6 @@ export default function RosterScreen() {
 }
 
 const styles = StyleSheet.create({
-  title: {
-    fontSize: 20,
-    fontWeight: "600",
-    marginBottom: 12,
-  },
   center: {
     alignItems: "center",
     justifyContent: "center",

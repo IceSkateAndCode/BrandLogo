@@ -7,7 +7,7 @@ import { SafeAreaView } from "react-native-safe-area-context";
 export default function StrengthsScreen() {
   return (
     <SafeAreaView style={styles.container}>
-      <View style={{marginBottom: 12}}>
+      <View style={{marginBottom: 12, marginTop: -20}}>
         <Text style={defaultStyles.title}>Strengths</Text>
       </View>
       <Text style={styles.textStyle}> Each element is strong against two others: {'\n'}

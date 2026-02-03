@@ -7,7 +7,7 @@ import { SafeAreaView } from "react-native-safe-area-context";
 export default function EnhancingScreen() {
   return (
     <SafeAreaView style={styles.container}>      
-      <View style={{marginBottom: 12}}>
+      <View style={{marginBottom: 12, marginTop: -20}}>
         <Text style={defaultStyles.title}>Enhancing</Text>
       </View>
       <Text style={styles.textStyle}>Each element can enhance the strength of one other: {'\n'}

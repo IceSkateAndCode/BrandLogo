@@ -13,13 +13,15 @@ import colors from "./colors";
   
   textStyle: {
     fontFamily: 'Metamorphous',
-    color: colors.text.light
+    color: colors.text.light,
+    textAlign: 'left'
   },
 
   title: {
     fontFamily: 'Jacquard24',
     fontSize: 36,
-    color: colors.primary
+    color: colors.primary,
+    textAlign: 'center'
   },
 })
 

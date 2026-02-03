@@ -37,9 +37,9 @@ function getTitleFromPath(pathname: string){
 export default function AppHeader() {
   const pathname = usePathname();
   const title = getTitleFromPath(pathname);
-    const { session } = useAuth();
+  const { session } = useAuth();
 
-    if (session===null) return;
+  if (session===null) return;
 
   return <View style={styles.container}>
     <View style={styles.leftContainer}>
